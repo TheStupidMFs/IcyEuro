@@ -96,27 +96,27 @@
           <p>Full sessions, squad chemistry and the moments that deserve another look.</p>
         </div>
         <div class="clip-grid clip-grid--youtube">
-          <a class="clip-card clip-card--large" href="https://youtu.be/zUQZ79uz6jM" target="_blank" rel="noopener">
+          <a class="clip-card clip-card--large" href="https://youtu.be/zUQZ79uz6jM" data-youtube="zUQZ79uz6jM">
             <div class="clip-card__image"><img src="https://i.ytimg.com/vi/zUQZ79uz6jM/hqdefault.jpg" alt="IcyEuro YouTube video thumbnail"><span class="play" aria-hidden="true"><span class="play-triangle"></span></span></div>
             <div><span>FULL VIDEO</span><h3>The full IcyEuro experience.</h3><p>Watch on YouTube</p></div>
           </a>
-          <a class="clip-card" href="https://youtu.be/0XLibEyQcfI" target="_blank" rel="noopener">
+          <a class="clip-card" href="https://youtu.be/0XLibEyQcfI" data-youtube="0XLibEyQcfI">
             <div class="clip-card__image"><img src="https://i.ytimg.com/vi/0XLibEyQcfI/hqdefault.jpg" alt="IcyEuro YouTube video thumbnail"><span class="play" aria-hidden="true"><span class="play-triangle"></span></span></div>
             <div><span>FULL VIDEO</span><h3>Another run. Another story.</h3><p>Watch on YouTube</p></div>
           </a>
-          <a class="clip-card" href="https://youtu.be/KHmo1eMn0c8" target="_blank" rel="noopener">
+          <a class="clip-card" href="https://youtu.be/KHmo1eMn0c8" data-youtube="KHmo1eMn0c8">
             <div class="clip-card__image"><img src="https://i.ytimg.com/vi/KHmo1eMn0c8/hqdefault.jpg" alt="IcyEuro YouTube video thumbnail"><span class="play" aria-hidden="true"><span class="play-triangle"></span></span></div>
             <div><span>FULL VIDEO</span><h3>Built for the long game.</h3><p>Watch on YouTube</p></div>
           </a>
-          <a class="clip-card clip-card--short" href="https://www.youtube.com/shorts/0xOE1g4Yk6c" target="_blank" rel="noopener">
+          <a class="clip-card clip-card--short" href="https://www.youtube.com/shorts/0xOE1g4Yk6c" data-youtube="0xOE1g4Yk6c">
             <div class="clip-card__image"><img src="https://i.ytimg.com/vi/0xOE1g4Yk6c/hqdefault.jpg" alt="IcyEuro YouTube Short thumbnail"><span class="play" aria-hidden="true"><span class="play-triangle"></span></span></div>
             <div><span>ICY SHORT</span><h3>Quick freeze.</h3><p>Watch the Short</p></div>
           </a>
-          <a class="clip-card clip-card--short" href="https://www.youtube.com/shorts/zxvy9HzklAc" target="_blank" rel="noopener">
+          <a class="clip-card clip-card--short" href="https://www.youtube.com/shorts/zxvy9HzklAc" data-youtube="zxvy9HzklAc">
             <div class="clip-card__image"><img src="https://i.ytimg.com/vi/zxvy9HzklAc/hqdefault.jpg" alt="IcyEuro YouTube Short thumbnail"><span class="play" aria-hidden="true"><span class="play-triangle"></span></span></div>
             <div><span>ICY SHORT</span><h3>Caught in the chaos.</h3><p>Watch the Short</p></div>
           </a>
-          <a class="clip-card clip-card--short" href="https://www.youtube.com/shorts/kECweY3FaJE" target="_blank" rel="noopener">
+          <a class="clip-card clip-card--short" href="https://www.youtube.com/shorts/kECweY3FaJE" data-youtube="kECweY3FaJE">
             <div class="clip-card__image"><img src="https://i.ytimg.com/vi/kECweY3FaJE/hqdefault.jpg" alt="IcyEuro YouTube Short thumbnail"><span class="play" aria-hidden="true"><span class="play-triangle"></span></span></div>
             <div><span>ICY SHORT</span><h3>One more Icy moment.</h3><p>Watch the Short</p></div>
           </a>
@@ -175,6 +175,23 @@
       <p>Powered by <a href="https://stupidmfs.com" target="_blank" rel="noopener">Stupid MFs</a></p>
       <p>Brand direction by The Communiti</p>
     </footer>
+  </div>
+
+
+  <div class="video-modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="IcyEuro video player">
+    <button class="video-modal__backdrop" type="button" data-close-video aria-label="Close video"></button>
+    <div class="video-modal__panel">
+      <div class="video-modal__bar">
+        <div><span class="signal-dot is-live"></span><b>ICYEURO VIDEO</b></div>
+        <div class="video-modal__actions">
+          <a id="videoExternalLink" href="#" target="_blank" rel="noopener">Open on YouTube</a>
+          <button class="video-modal__close" type="button" data-close-video aria-label="Close video"><span></span><span></span></button>
+        </div>
+      </div>
+      <div class="video-modal__frame">
+        <iframe id="youtubePlayer" title="IcyEuro YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
   </div>
 
   <script src="app.js"></script>
