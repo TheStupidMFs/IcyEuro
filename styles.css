@@ -49,3 +49,23 @@ footer{max-width:1220px;margin:auto;padding:35px 24px;border-top:1px solid rgba(
 .enter-button .button-arrow:before{content:"";position:absolute;width:11px;height:11px;left:13px;top:8px;background:none;border-top:3px solid #fff;border-right:3px solid #fff;transform:none}
 .enter-button .button-arrow:after{content:"";position:absolute;width:17px;height:3px;left:8px;top:18px;background:#fff;border:0;transform:rotate(-45deg);transform-origin:center}
 .enter-button:hover .button-arrow{transform:translate(2px,-2px);background:rgba(0,0,0,.28)}
+
+/* Embedded YouTube player */
+body.video-open{overflow:hidden}
+.video-modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease}
+.video-modal.is-open{opacity:1;visibility:visible;pointer-events:auto}
+.video-modal__backdrop{position:absolute;inset:0;width:100%;height:100%;border:0;background:rgba(0,3,5,.9);backdrop-filter:blur(12px);cursor:pointer}
+.video-modal__panel{position:relative;z-index:2;width:min(1180px,94vw);background:#050809;border:1px solid rgba(159,234,255,.25);box-shadow:0 30px 100px rgba(0,0,0,.8),0 0 60px rgba(242,13,34,.12);transform:translateY(18px) scale(.98);transition:transform .3s ease}
+.video-modal.is-open .video-modal__panel{transform:none}
+.video-modal__bar{min-height:58px;padding:11px 14px 11px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.09)}
+.video-modal__bar>div{display:flex;align-items:center;gap:10px}
+.video-modal__bar b{font-family:"Barlow Condensed";letter-spacing:.13em;font-size:14px}
+.video-modal__actions a{font-size:11px;color:var(--ice);text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+.video-modal__close{position:relative;width:36px;height:36px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.04);cursor:pointer}
+.video-modal__close span{position:absolute;left:9px;top:16px;width:17px;height:2px;background:#fff}
+.video-modal__close span:first-child{transform:rotate(45deg)}
+.video-modal__close span:last-child{transform:rotate(-45deg)}
+.video-modal__close:hover{background:var(--red);border-color:var(--red)}
+.video-modal__frame{position:relative;aspect-ratio:16/9;background:#000}
+.video-modal__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media(max-width:600px){.video-modal{padding:10px}.video-modal__panel{width:100%}.video-modal__bar{min-height:52px;padding:8px 9px 8px 12px}.video-modal__actions a{display:none}.video-modal__frame{aspect-ratio:16/9}}
