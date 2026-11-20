@@ -105,3 +105,37 @@ const observer=new IntersectionObserver(entries=>{
   });
 },{rootMargin:'-40% 0px -50% 0px'});
 sections.forEach(s=>observer.observe(s));
+
+const videoModal=document.getElementById('videoModal');
+const youtubePlayer=document.getElementById('youtubePlayer');
+const videoExternalLink=document.getElementById('videoExternalLink');
+let lastVideoTrigger=null;
+
+function openSiteVideo(trigger){
+  const id=trigger.dataset.youtube;
+  if(!id) return;
+  lastVideoTrigger=trigger;
+  youtubePlayer.src=`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0&modestbranding=1`;
+  videoExternalLink.href=trigger.href;
+  videoModal.classList.add('is-open');
+  videoModal.setAttribute('aria-hidden','false');
+  document.body.classList.add('video-open');
+  videoModal.querySelector('.video-modal__close').focus();
+}
+function closeSiteVideo(){
+  videoModal.classList.remove('is-open');
+  videoModal.setAttribute('aria-hidden','true');
+  youtubePlayer.src='';
+  document.body.classList.remove('video-open');
+  if(lastVideoTrigger) lastVideoTrigger.focus();
+}
+document.querySelectorAll('[data-youtube]').forEach(card=>{
+  card.addEventListener('click',event=>{
+    event.preventDefault();
+    openSiteVideo(card);
+  });
+});
+document.querySelectorAll('[data-close-video]').forEach(button=>button.addEventListener('click',closeSiteVideo));
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&videoModal.classList.contains('is-open')) closeSiteVideo();
+});
