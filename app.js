@@ -56,7 +56,7 @@ function renderTwitchClips(clips=[]){
     const label=card.querySelector('div:last-child > span');
     if(label) label.textContent=index===0?'LATEST TWITCH DROP':'FROM THE STREAM';
     const meta=card.querySelector('div:last-child > p');
-    if(meta) meta.textContent=clip.views?`${Number(clip.views).toLocaleString()} views · Watch on Twitch ↗`:'Watch on Twitch ↗';
+    if(meta) meta.textContent=clip.views?`${Number(clip.views).toLocaleString()} views · Watch on Twitch`:'Watch on Twitch';
   });
 }
 
