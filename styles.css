@@ -32,3 +32,14 @@ footer{max-width:1220px;margin:auto;padding:35px 24px;border-top:1px solid rgba(
 .enter-button:active{transform:translateY(-1px) scale(.99)}
 @keyframes icyScan{0%,45%{left:-45%}70%,100%{left:125%}}
 @media(prefers-reduced-motion:reduce){.enter-button:before{animation:none}}
+
+/* Platform-consistent CSS icons — no emoji glyphs */
+.button-arrow,.icon-arrow{position:relative;display:inline-block;width:18px;height:18px}
+.button-arrow:before,.icon-arrow:before{content:"";position:absolute;width:10px;height:2px;background:currentColor;left:3px;top:8px;transform:rotate(-45deg);transform-origin:center}
+.button-arrow:after,.icon-arrow:after{content:"";position:absolute;width:7px;height:7px;border-top:2px solid currentColor;border-right:2px solid currentColor;right:1px;top:2px}
+.icon-arrow{width:16px;height:16px;color:var(--ice)}
+.play-triangle{display:block;width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:11px solid #fff;margin-left:3px}
+.ticker-sep{display:inline-block;width:6px;height:6px;background:var(--red);transform:rotate(45deg);flex:0 0 auto}
+.menu-button{width:34px;height:30px;padding:5px;flex-direction:column;justify-content:space-between;align-items:stretch}
+.menu-button span{display:block;height:2px;background:#fff;border-radius:2px}
+@media(max-width:900px){.menu-button{display:flex}}
