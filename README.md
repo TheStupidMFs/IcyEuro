@@ -12,7 +12,6 @@ Place these files in `assets/`:
 - `icyeuro-logo.png` — transparent horizontal logo
 - `icyeuro-character.png` — transparent full-body character
 - `icyeuro-photo.png` — real portrait (reserved for future use)
-- `clip-1.jpg`, `clip-2.jpg`, `clip-3.jpg` — clip thumbnails
 
 ## Twitch automation
 
@@ -21,7 +20,8 @@ The frontend requests `/api/twitch`. The included Cloudflare Pages Function:
 1. Checks whether **IcyEuro** is currently live.
 2. Embeds the live channel when online.
 3. Fetches and embeds the latest archived Twitch VOD when offline.
-4. Falls back to the standard Twitch channel player if the API is not configured.
+4. Pulls the latest three Twitch clips with their thumbnails, titles and view counts.
+5. Falls back to the standard Twitch channel player if the API is not configured.
 
 Create a Twitch developer application and configure these encrypted deployment variables:
 
