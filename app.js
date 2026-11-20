@@ -70,7 +70,6 @@ async function loadBroadcast(){
     const res=await fetch('/api/twitch');
     if(!res.ok) throw new Error('API unavailable');
     const data=await res.json();
-    renderTwitchClips(data.clips||[]);
     if(data.live){
       pill.classList.add('is-live');
       pill.querySelector('b').textContent='Live now';
