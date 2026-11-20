@@ -20,3 +20,15 @@ footer{max-width:1220px;margin:auto;padding:35px 24px;border-top:1px solid rgba(
 .clip-card__image>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}.clip-card__image .play{position:relative;z-index:2}.clip-grid--youtube{grid-template-columns:1.25fr 1fr}.clip-grid--youtube .clip-card--large{grid-row:span 2}.clip-grid--youtube .clip-card--short{grid-template-columns:.8fr 1.2fr}.story__art--photo{min-height:650px;align-items:stretch;background:radial-gradient(circle,rgba(35,124,148,.18),transparent 62%)}.story__art--photo>img{width:100%;height:650px;max-width:none;max-height:none;object-fit:cover;object-position:center 35%;filter:saturate(.9) contrast(1.05)}.story__art--photo:after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(180deg,transparent 55%,rgba(2,5,7,.78))}.story__art--photo .coordinate{z-index:4}
 @media(max-width:900px){.clip-grid--youtube{grid-template-columns:1fr}.clip-grid--youtube .clip-card--large{grid-row:auto}.story__art--photo>img{height:540px}}
 @media(max-width:600px){.story__art--photo>img{height:440px}.clip-grid--youtube .clip-card--short{grid-template-columns:1fr}}
+
+/* Tactical entrance CTA */
+.enter-button{position:relative;isolation:isolate;overflow:hidden;min-width:230px;padding:19px 22px 19px 31px;border:1px solid rgba(255,255,255,.28);background:linear-gradient(120deg,#b80819 0%,#f20d22 58%,#ff3445 100%);box-shadow:0 0 0 6px rgba(242,13,34,.09),0 16px 42px rgba(242,13,34,.34),inset 0 1px rgba(255,255,255,.22);clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px));text-shadow:0 2px 10px rgba(0,0,0,.4)}
+.enter-button:before{content:"";position:absolute;z-index:-1;top:-40%;bottom:-40%;left:-45%;width:34%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-18deg);animation:icyScan 2.8s ease-in-out infinite}
+.enter-button:after{content:"";position:absolute;left:12px;top:12px;width:7px;height:7px;border-left:2px solid var(--ice);border-top:2px solid var(--ice);opacity:.9}
+.enter-button span{font-size:21px;letter-spacing:.19em}
+.enter-button i{width:34px;height:34px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.35);border-radius:50%;font-size:17px;background:rgba(0,0,0,.18);transition:transform .25s,background .25s}
+.enter-button:hover{background:linear-gradient(120deg,#e20b20,#ff2639);border-color:rgba(255,255,255,.6);transform:translateY(-4px) scale(1.025);box-shadow:0 0 0 7px rgba(242,13,34,.13),0 20px 55px rgba(242,13,34,.48)}
+.enter-button:hover i{transform:rotate(45deg);background:rgba(0,0,0,.3)}
+.enter-button:active{transform:translateY(-1px) scale(.99)}
+@keyframes icyScan{0%,45%{left:-45%}70%,100%{left:125%}}
+@media(prefers-reduced-motion:reduce){.enter-button:before{animation:none}}
