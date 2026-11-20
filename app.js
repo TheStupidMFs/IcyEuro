@@ -41,6 +41,25 @@ function mountPlayer({live=false,videoId=null}={}){
   root.innerHTML=`<iframe src="${src}" allowfullscreen="true" scrolling="no" allow="autoplay; fullscreen"></iframe>`;
   document.querySelector('.signal-dot').classList.toggle('is-live',live);
 }
+function renderTwitchClips(clips=[]){
+  if(!clips.length) return;
+  const cards=[...document.querySelectorAll('.clip-card')];
+  cards.forEach((card,index)=>{
+    const clip=clips[index];
+    if(!clip) return;
+    card.href=clip.url;
+    const image=card.querySelector('.clip-card__image');
+    const thumb=(clip.thumbnail||'').replace('%{width}','960').replace('%{height}','540').replace('{width}','960').replace('{height}','540');
+    if(thumb) image.style.backgroundImage=`linear-gradient(rgba(2,3,4,.08),rgba(2,3,4,.76)),url("${thumb}")`;
+    const title=card.querySelector('h3');
+    if(title) title.textContent=clip.title||'Latest IcyEuro clip';
+    const label=card.querySelector('div:last-child > span');
+    if(label) label.textContent=index===0?'LATEST TWITCH DROP':'FROM THE STREAM';
+    const meta=card.querySelector('div:last-child > p');
+    if(meta) meta.textContent=clip.views?`${Number(clip.views).toLocaleString()} views · Watch on Twitch ↗`:'Watch on Twitch ↗';
+  });
+}
+
 async function loadBroadcast(){
   const pill=document.getElementById('statusPill');
   const label=document.getElementById('broadcastLabel');
@@ -51,6 +70,7 @@ async function loadBroadcast(){
     const res=await fetch('/api/twitch');
     if(!res.ok) throw new Error('API unavailable');
     const data=await res.json();
+    renderTwitchClips(data.clips||[]);
     if(data.live){
       pill.classList.add('is-live');
       pill.querySelector('b').textContent='Live now';
