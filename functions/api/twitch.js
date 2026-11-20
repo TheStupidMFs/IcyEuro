@@ -12,18 +12,39 @@ export async function onRequestGet({env}){
     if(!tokenRes.ok) throw new Error('Token request failed');
     const {access_token}=await tokenRes.json();
     const auth={Authorization:`Bearer ${access_token}`,'Client-Id':env.TWITCH_CLIENT_ID};
+
     const userRes=await fetch(`${TWITCH_API}/users?login=${USER_LOGIN}`,{headers:auth});
     const user=(await userRes.json()).data?.[0];
     if(!user) throw new Error('Twitch user not found');
-    const streamRes=await fetch(`${TWITCH_API}/streams?user_id=${user.id}`,{headers:auth});
+
+    const [streamRes,videosRes,clipsRes]=await Promise.all([
+      fetch(`${TWITCH_API}/streams?user_id=${user.id}`,{headers:auth}),
+      fetch(`${TWITCH_API}/videos?user_id=${user.id}&first=1&type=archive&sort=time`,{headers:auth}),
+      fetch(`${TWITCH_API}/clips?broadcaster_id=${user.id}&first=3`,{headers:auth})
+    ]);
+
     const live=(await streamRes.json()).data?.[0];
-    if(live){
-      return new Response(JSON.stringify({live:true,title:live.title,game:live.game_name,viewers:live.viewer_count,startedAt:live.started_at}),{headers});
-    }
-    const videosRes=await fetch(`${TWITCH_API}/videos?user_id=${user.id}&first=1&type=archive&sort=time`,{headers:auth});
     const video=(await videosRes.json()).data?.[0];
-    return new Response(JSON.stringify({live:false,latestVideo:video?{id:video.id,title:video.title,duration:video.duration,url:video.url,createdAt:video.created_at}:null}),{headers});
+    const clips=((await clipsRes.json()).data||[]).map(clip=>({
+      id:clip.id,
+      title:clip.title,
+      url:clip.url,
+      thumbnail:clip.thumbnail_url,
+      views:clip.view_count,
+      createdAt:clip.created_at
+    }));
+
+    const payload={
+      live:Boolean(live),
+      title:live?.title||null,
+      game:live?.game_name||null,
+      viewers:live?.viewer_count||null,
+      startedAt:live?.started_at||null,
+      latestVideo:video?{id:video.id,title:video.title,duration:video.duration,url:video.url,createdAt:video.created_at}:null,
+      clips
+    };
+    return new Response(JSON.stringify(payload),{headers});
   }catch(error){
-    return new Response(JSON.stringify({error:'Unable to load Twitch broadcast'}),{status:502,headers});
+    return new Response(JSON.stringify({error:'Unable to load Twitch content'}),{status:502,headers});
   }
 }
